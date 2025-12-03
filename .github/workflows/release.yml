@@ -1,0 +1,55 @@
+name: "Exploit Tracker API SDK release"
+
+on:
+  release:
+    types:
+      - released
+      - prereleased
+
+jobs:
+  test-package:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+      - name: Install SDK
+        run: |
+          pip install -e .
+      - name: Run basic import
+        run: |
+          python -c "import crowdsec_tracker_api"
+
+  publish-on-pypi:
+    name: Publish to PyPI
+    needs: test-package
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/crowdsec-service-api-sdk
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+      - name: Build package
+        run: python -m build
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          package-dir: ./dist
