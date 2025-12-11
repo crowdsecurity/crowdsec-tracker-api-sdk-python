@@ -32,17 +32,20 @@
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
-response = client.get_cves(
-    query=None,
-    page=1,
-    size=50,
-)
-print(response)
+client = Cves(auth=auth)
+try:
+    response = client.get_cves(
+        query=None,
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -67,15 +70,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
-response = client.get_cve(
-    cve_id='cve_id',
-)
-print(response)
+client = Cves(auth=auth)
+try:
+    response = client.get_cve(
+        cve_id='cve_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -103,18 +109,21 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
-response = client.get_cve_ips(
-    cve_id='cve_id',
-    since=None,
-    page=1,
-    size=50,
-)
-print(response)
+client = Cves(auth=auth)
+try:
+    response = client.get_cve_ips(
+        cve_id='cve_id',
+        since=None,
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -141,17 +150,20 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
-response = client.get_cve_subscribed_integrations(
-    cve_id='cve_id',
-    page=1,
-    size=50,
-)
-print(response)
+client = Cves(auth=auth)
+try:
+    response = client.get_cve_subscribed_integrations(
+        cve_id='cve_id',
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -176,20 +188,23 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
     SubscribeCVEIntegrationRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
+client = Cves(auth=auth)
 request = SubscribeCVEIntegrationRequest(
         name=None,
 )
-response = client.subscribe_integration_to_cve(
-    request=request,
-    cve_id='cve_id',
-)
-print(response)
+try:
+    response = client.subscribe_integration_to_cve(
+        request=request,
+        cve_id='cve_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -214,15 +229,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Cves,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Cves(base_url=Server.production_server.value, auth=auth)
-response = client.unsubscribe_integration_from_cve(
-    cve_id='cve_id',
-    integration_name='integration_name',
-)
-print(response)
+client = Cves(auth=auth)
+try:
+    response = client.unsubscribe_integration_from_cve(
+        cve_id='cve_id',
+        integration_name='integration_name',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 

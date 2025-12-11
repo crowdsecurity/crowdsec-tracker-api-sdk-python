@@ -32,15 +32,18 @@
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.get_integrations(
-    tag=None,
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.get_integrations(
+        tag=None,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -64,22 +67,25 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
     IntegrationCreateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
+client = Integrations(auth=auth)
 request = IntegrationCreateRequest(
         name=None,
         description=None,
         entity_type=None,
         output_format=None,
 )
-response = client.create_integration(
-    request=request,
-)
-print(response)
+try:
+    response = client.create_integration(
+        request=request,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -103,15 +109,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.get_integration(
-    integration_id='integration_id',
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.get_integration(
+        integration_id='integration_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -133,15 +142,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.delete_integration(
-    integration_id='integration_id',
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.delete_integration(
+        integration_id='integration_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -166,23 +178,26 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
     IntegrationUpdateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
+client = Integrations(auth=auth)
 request = IntegrationUpdateRequest(
         name=None,
         description=None,
         output_format=None,
         regenerate_credentials=None,
 )
-response = client.update_integration(
-    request=request,
-    integration_id='integration_id',
-)
-print(response)
+try:
+    response = client.update_integration(
+        request=request,
+        integration_id='integration_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -207,17 +222,20 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.get_integration_content(
-    integration_id='integration_id',
-    page=1,
-    page_size=None,
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.get_integration_content(
+        integration_id='integration_id',
+        page=1,
+        page_size=None,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -240,15 +258,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.head_integration_content(
-    integration_id='integration_id',
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.head_integration_content(
+        integration_id='integration_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -272,15 +293,18 @@ print(response)
 ```python
 from crowdsec_tracker_api import (
     Integrations,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Integrations(base_url=Server.production_server.value, auth=auth)
-response = client.get_integration_content_stream(
-    integration_id='integration_id',
-    startup=True,
-)
-print(response)
+client = Integrations(auth=auth)
+try:
+    response = client.get_integration_content_stream(
+        integration_id='integration_id',
+        startup=True,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
