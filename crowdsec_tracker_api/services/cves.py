@@ -10,6 +10,8 @@ from httpx import Auth
 from ..http_client import HttpClient
 
 class Cves(Service):
+    def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
+        super().__init__(base_url=base_url, auth=auth)
     
     def get_cves(
         self,
