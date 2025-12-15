@@ -26,6 +26,14 @@ id
 | id | str | None ||
 | remediation | Optional[str] | None ||
 
+# **CVESubscription**
+## Required: 
+id
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | CVE ID ||
+
 # **HTTPValidationError**
 ## Properties
 | Property | Type | Description | Example |
@@ -45,7 +53,7 @@ name, entity_type, output_format
 
 # **IntegrationCreateResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint, credentials
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, endpoint, credentials
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -59,6 +67,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | output_format | str | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
@@ -66,7 +75,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 
 # **IntegrationGetResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, endpoint
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -80,6 +89,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | output_format | str | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
@@ -112,7 +122,7 @@ FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
 
 # **IntegrationUpdateResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, endpoint
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -126,6 +136,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | output_format | str | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
