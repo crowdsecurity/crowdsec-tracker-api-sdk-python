@@ -14,6 +14,7 @@ __all__ = [
     'ApiKeyCredentials',
     'BasicAuthCredentials',
     'BlocklistSubscription',
+    'CVESubscription',
     'HTTPValidationError',
     'IntegrationCreateRequest',
     'IntegrationCreateResponse',

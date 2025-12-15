@@ -23,6 +23,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [BlocklistSubscription](./Models.md#blocklistsubscription)
 
+[CVESubscription](./Models.md#cvesubscription)
+
 [HTTPValidationError](./Models.md#httpvalidationerror)
 
 [IntegrationCreateRequest](./Models.md#integrationcreaterequest)
