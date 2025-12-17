@@ -42,6 +42,8 @@ __all__ = [
     'GetCVEResponse',
     'GetCVESubscribedIntegrationsResponsePage',
     'GetCVEsResponsePage',
+    'GetCVEsSortBy',
+    'GetCVEsSortOrder',
     'History',
     'IPItem',
     'IntegrationResponse',

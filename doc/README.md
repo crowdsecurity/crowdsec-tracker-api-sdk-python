@@ -79,6 +79,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [GetCVEsResponsePage](./Models.md#getcvesresponsepage)
 
+[GetCVEsSortBy](./Models.md#getcvessortby)
+
+[GetCVEsSortOrder](./Models.md#getcvessortorder)
+
 [History](./Models.md#history)
 
 [IPItem](./Models.md#ipitem)

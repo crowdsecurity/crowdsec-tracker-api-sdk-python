@@ -5,7 +5,8 @@
 | ------ | ----------- |
 | [get_cves](#get_cves) | Get a paginated list of CVEs that CrowdSec is tracking |
 | [get_cve](#get_cve) | Get information about a specific CVE ID |
-| [get_cve_ips](#get_cve_ips) | Get information about IPs exploiting a specific CVE ID |
+| [download_cve_ips](#download_cve_ips) | Download the list of IPs exploiting a specific CVE ID in raw format |
+| [get_cve_ips_details](#get_cve_ips_details) | Get detailed information about IPs exploiting a specific CVE ID |
 | [get_cve_subscribed_integrations](#get_cve_subscribed_integrations) | Get the list of integrations subscribed to a specific CVE ID |
 | [subscribe_integration_to_cve](#subscribe_integration_to_cve) | Subscribe an integration to receive threats related to a specific CVE ID |
 | [unsubscribe_integration_from_cve](#unsubscribe_integration_from_cve) | Unsubscribe an integration from receiving threats related to a specific CVE ID |
@@ -19,6 +20,8 @@
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
 | query | Optional[str] | Search query for CVEs | False | None |
+| sort_by | Optional[GetCVEsSortBy] | Field to sort by | False | GetCVEsSortBy("rule_release_date") |
+| sort_order | Optional[GetCVEsSortOrder] | Sort order: ascending or descending | False | GetCVEsSortOrder("desc") |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -40,6 +43,8 @@ client = Cves(auth=auth)
 try:
     response = client.get_cves(
         query=None,
+        sort_by=rule_release_date,
+        sort_order=desc,
         page=1,
         size=50,
     )
@@ -85,16 +90,52 @@ except HTTPStatusError as e:
 ```
 
 
-## **get_cve_ips**
-### Get information about IPs exploiting a specific CVE ID 
-- Endpoint: `/cves/{cve_id}/ips`
+## **download_cve_ips**
+### Download the list of IPs exploiting a specific CVE ID in raw format 
+- Endpoint: `/cves/{cve_id}/ips-download`
 - Method: `GET`
 
 ### Parameters:
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
 | cve_id | str |  | True |  |
-| since | Optional[str] | Filter IPs seen since this date, format duration (e.g., 7d, 24h) | False | None |
+### Returns:
+[str](./Models.md#str)
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 404 | CVE Not Found |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_tracker_api import (
+    Cves,
+    ApiKeyAuth,
+)
+from httpx import HTTPStatusError
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Cves(auth=auth)
+try:
+    response = client.download_cve_ips(
+        cve_id='cve_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
+```
+
+
+## **get_cve_ips_details**
+### Get detailed information about IPs exploiting a specific CVE ID 
+- Endpoint: `/cves/{cve_id}/ips-details`
+- Method: `GET`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| cve_id | str |  | True |  |
+| since | Optional[str] | Filter IPs seen since this date, format duration (e.g., 7d, 24h), default to 14d | False | "14d" |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -115,9 +156,9 @@ from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Cves(auth=auth)
 try:
-    response = client.get_cve_ips(
+    response = client.get_cve_ips_details(
         cve_id='cve_id',
-        since=None,
+        since=14d,
         page=1,
         size=50,
     )

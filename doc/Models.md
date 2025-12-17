@@ -48,8 +48,8 @@ name, entity_type, output_format
 |----------|------|-------------|---------|
 | name | str | Name of the integration ||
 | description | str | Description of the integration ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 
 # **IntegrationCreateResponse**
 ## Required: 
@@ -63,8 +63,8 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
@@ -85,8 +85,8 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
@@ -117,7 +117,7 @@ FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
 |----------|------|-------------|---------|
 | name | str | New name ||
 | description | str | New description ||
-| output_format | str | None ||
+| output_format | OutputFormat | None ||
 | regenerate_credentials | bool | Regenerate credentials for the integration ||
 
 # **IntegrationUpdateResponse**
@@ -132,8 +132,8 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
@@ -342,6 +342,14 @@ items, total, page, size, pages, links
 | pages | int | None ||
 | links | Links | None ||
 
+# **GetCVEsSortBy**
+## Enum: 
+RULE_RELEASE_DATE, TRENDING, NB_IPS, NAME
+
+# **GetCVEsSortOrder**
+## Enum: 
+ASC, DESC
+
 # **History**
 ## Required: 
 first_seen, last_seen, full_age, days_age
@@ -392,7 +400,7 @@ organization_id, entity_type, name, output_format
 | tags | list[str] | None ||
 | organization_id | str | None ||
 | created_at | str | Time the integration was created ||
-| entity_type | str | None ||
+| entity_type | EntityType | None ||
 | id | str | ID of the integration ||
 | blocklists | list[BlocklistSubscription] | None ||
 | allowlists | list[AllowlistSubscription] | None ||
@@ -400,7 +408,7 @@ organization_id, entity_type, name, output_format
 | name | str | Name of the integration ||
 | updated_at | str | Last time the integration was updated ||
 | description | Optional[str] | Description of the integration ||
-| output_format | str | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 
 # **Location**

@@ -16,6 +16,8 @@ class Cves(Service):
     def get_cves(
         self,
         query: Optional[str] = None,
+        sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
+        sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
         page: int = 1,
         size: int = 50,
     )-> GetCVEsResponsePage:
@@ -55,23 +57,43 @@ class Cves(Service):
         
         return GetCVEResponse(**response.json())
     
-    def get_cve_ips(
+    def download_cve_ips(
         self,
         cve_id: str,
-        since: Optional[str] = None,
+    )-> str:
+        endpoint_url = "/cves/{cve_id}/ips-download"
+        loc = locals()
+        headers = {}
+        params = {}
+        path_params = json.loads(
+            CvesDownloadCveIpsPathParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
+        
+        response = self.http_client.get(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers
+        )
+        
+        return response.text
+    
+    def get_cve_ips_details(
+        self,
+        cve_id: str,
+        since: Optional[str] = "14d",
         page: int = 1,
         size: int = 50,
     )-> GetCVEIPsResponsePage:
-        endpoint_url = "/cves/{cve_id}/ips"
+        endpoint_url = "/cves/{cve_id}/ips-details"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCveIpsQueryParameters(**loc).model_dump_json(
+            CvesGetCveIpsDetailsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
         path_params = json.loads(
-            CvesGetCveIpsPathParameters(**loc).model_dump_json(
+            CvesGetCveIpsDetailsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
