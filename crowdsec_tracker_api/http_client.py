@@ -49,7 +49,7 @@ class HttpClient:
         self.aws_region = aws_region
         self.base_url = base_url
         self.auth = auth
-        self.client = httpx.Client()
+        self.client = httpx.Client(headers={"Accept-Encoding": "gzip"})
         self.timeout = 30
 
     def _replace_path_params(self, url: str, path_params: dict):
