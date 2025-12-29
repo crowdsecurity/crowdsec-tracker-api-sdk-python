@@ -212,10 +212,13 @@ except HTTPStatusError as e:
 | integration_id | str |  | True |  |
 | page | int | Page number to return | False | 1 |
 | page_size | Optional[int] | Maximum number of items to return, 0 means no limit (default), should be greater than 10000 | False | None |
+### Returns:
+[str](./Models.md#str)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
 | 404 | Integration not found |
+| 204 | Integration has no subscribed blocklists or no content available |
 | 422 | Validation Error |
 ### Usage
 

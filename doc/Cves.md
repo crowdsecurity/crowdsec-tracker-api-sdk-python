@@ -13,7 +13,7 @@
 
 ## **get_cves**
 ### Get a paginated list of CVEs that CrowdSec is tracking 
-- Endpoint: `/cves/`
+- Endpoint: `/cves`
 - Method: `GET`
 
 ### Parameters:

@@ -37,8 +37,10 @@ class Page(BaseModelSdk, Generic[T]):
 
 
 class Service:
-    def __init__(self, base_url: str, auth: Auth) -> None:
-        self.http_client = HttpClient(base_url=base_url, auth=auth)
+    def __init__(self, base_url: str, auth: Auth, user_agent: str = None) -> None:
+        self.http_client = HttpClient(
+            base_url=base_url, auth=auth, user_agent=user_agent
+        )
 
     def next_page(self, page: BaseModelSdk) -> Optional[BaseModelSdk]:
         if not hasattr(page, "links") or not page.links:

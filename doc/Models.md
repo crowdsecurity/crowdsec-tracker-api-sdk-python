@@ -178,8 +178,8 @@ loc, msg, type
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| vendor | str | Vendor of the affected component ||
-| product | str | Product name of the affected component ||
+| vendor | Optional[str] | Vendor of the affected component ||
+| product | Optional[str] | Product name of the affected component ||
 
 # **AllowlistSubscription**
 ## Required: 
@@ -368,7 +368,7 @@ ip
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | ip | str | IP address ||
-| reputation | str | Reputation of the IP ||
+| reputation | Optional[str] | Reputation of the IP ||
 | ip_range | Optional[str] | IP range ||
 | ip_range_score | Optional[int] | IP range score ||
 | ip_range_24 | Optional[str] | IP range /24 ||
@@ -376,20 +376,20 @@ ip
 | ip_range_24_score | Optional[int] | IP range /24 score ||
 | as_name | Optional[str] | AS name ||
 | as_num | Optional[int] | AS number ||
-| background_noise_score | int | Background noise score ||
+| background_noise_score | Optional[int] | Background noise score ||
 | background_noise | Optional[str] | Background noise level ||
 | confidence | Optional[str] | Confidence level ||
 | location | Optional[Location] | IP location information ||
 | reverse_dns | Optional[str] | Reverse DNS ||
 | behaviors | list[Behavior] | List of behaviors ||
 | references | list[Reference] | List of references ||
-| history | History | None ||
-| classifications | Classifications | None ||
+| history | Optional[History] | Historical data ||
+| classifications | Optional[Classifications] | Classification data ||
 | mitre_techniques | list[MitreTechnique] | MITRE techniques ||
 | cves | list[str] | List of CVEs ||
 | attack_details | list[AttackDetail] | Attack details ||
 | target_countries | Target Countries | Target countries ||
-| scores | Scores | None ||
+| scores | Optional[Scores] | Scoring information ||
 
 # **IntegrationResponse**
 ## Required: 
