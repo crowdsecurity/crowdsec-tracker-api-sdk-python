@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Integrations(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth)
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_tracker_api/1.94.2")
     
     def get_integrations(
         self,
@@ -124,7 +124,7 @@ class Integrations(Service):
         integration_id: str,
         page: int = 1,
         page_size: Optional[int] = None,
-    ):
+    )-> str:
         endpoint_url = "/integrations/{integration_id}/content"
         loc = locals()
         headers = {}
@@ -143,7 +143,7 @@ class Integrations(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return None
+        return response.text
     
     def get_integration_content_stream(
         self,

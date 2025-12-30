@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Cves(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth)
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_tracker_api/1.94.2")
     
     def get_cves(
         self,
@@ -21,7 +21,7 @@ class Cves(Service):
         page: int = 1,
         size: int = 50,
     )-> GetCVEsResponsePage:
-        endpoint_url = "/cves/"
+        endpoint_url = "/cves"
         loc = locals()
         headers = {}
         params = json.loads(
