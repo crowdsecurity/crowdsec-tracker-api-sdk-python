@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Integrations(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_tracker_api/1.94.2")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_tracker_api/1.95.0")
     
     def get_integrations(
         self,
@@ -77,11 +77,16 @@ class Integrations(Service):
     def delete_integration(
         self,
         integration_id: str,
+        force: bool = False,
     ):
         endpoint_url = "/integrations/{integration_id}"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            IntegrationsDeleteIntegrationQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = json.loads(
             IntegrationsDeleteIntegrationPathParameters(**loc).model_dump_json(
                 exclude_none=True

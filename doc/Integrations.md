@@ -133,6 +133,7 @@ except HTTPStatusError as e:
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
 | integration_id | str |  | True |  |
+| force | bool | Force delete the integration even if it has active subscriptions (it will unsubscribe from all lists) | False | False |
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -150,6 +151,7 @@ client = Integrations(auth=auth)
 try:
     response = client.delete_integration(
         integration_id='integration_id',
+        force=True,
     )
     print(response)
 except HTTPStatusError as e:
